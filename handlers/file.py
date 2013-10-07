@@ -21,7 +21,7 @@ class FileHandler(Handler):
         temp_directory = self.get_temp_folder_path()
         temp_file_path = os.path.join(
             temp_directory,
-            'file'
+            self.file.get_file_name()
         )
 
         self.create_target_path(
