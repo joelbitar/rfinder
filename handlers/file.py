@@ -24,6 +24,7 @@ class FileHandler(Handler):
             self.file.get_file_name()
         )
 
+        # Create temp dir
         self.create_target_path(
             temp_directory
         )
@@ -32,6 +33,11 @@ class FileHandler(Handler):
         shutil.copyfile(
             self.file.full_path,
             temp_file_path
+        )
+
+        # Create target path, again? (maby removed before.. who knows?)
+        self.create_target_path(
+            self.file.get_pretty_path()
         )
 
         print 'Moving file to final path...'
