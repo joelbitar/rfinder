@@ -41,8 +41,9 @@ def removeall(path):
 class PathPartsSorter(SortAdapter):
     regexps_and_points = (
         ('.*\.?archive\.?.*', -10),
-        ('.*\.?pack\.?.*', -10),
+        ('.*\.?pack\.?.*', -20),
         ('.*best.?of\..*', -5),
+        ('.*\.\w{3,4}$', -1),
     )
 
     def get_points(self, string):
@@ -51,7 +52,7 @@ class PathPartsSorter(SortAdapter):
                 return points
 
         # Defaults to 0
-        return 0
+        return 1
 
 
     def __lt__(self, other):

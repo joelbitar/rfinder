@@ -11,7 +11,12 @@ class MovieAnalyzer(Analyzer):
             regexps += [r'(.*)[\s\-_\.]{0,2}%s.*' % stop_word]
 
         for path_part in self.file.get_path_parts():
+            # If it is a movie pack, ignore it.
+            if path_part.lower().find('movie.pack'):
+                continue
+
             print 'Path part;', path_part
+
             if settings.VERBOSE > 2:
                 print 'MovieAnalyzer.get_move_name()'
                 print 'Path part: %s' % (path_part)
