@@ -127,6 +127,10 @@ while True:
             print 'Already processed'
             continue
 
+        if not os.path.exists(t.path):
+            print 'Did not exist on local filesystem, ignoring.'
+            continue
+
         print 'YAY new'
         print t.id
 
