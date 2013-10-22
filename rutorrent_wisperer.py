@@ -21,8 +21,8 @@ parser.add_option('-p', '--path', dest='path', default=None)
 parser.add_option('-v', '--verbose', dest='verbose', default=False)
 parser.add_option('-c', '--unpacked_files_count_', dest='unpacked_files_count', default=4)
 parser.add_option('-r', '--remove_old_output_compare_file', dest='remove_old_output_compare_file', default="")
+parser.add_option('-l', '--logdir', dest='log_dir', default=None)
 parser.add_option('-t', '--temp_unpack_path', dest='temp_unpack_path', default=None)
-parser.add_option('-l', '--log_path', dest='log_path', default=None)
 parser.add_option('-o', '--output_path', dest='output_path', default=None)
 
 (options, args) = parser.parse_args()
@@ -108,10 +108,9 @@ if options.basic_auth:
     )
 
 tracker = Tracker(
-    '/home/joel/projects/rfinder/',
+    options.log_dir,
     'rutorrent-track'
 )
-tracker.clear()
 
 g = r.commands.get_torrent_list()
 

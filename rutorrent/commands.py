@@ -1,5 +1,4 @@
 __author__ = 'joel'
-from simplejson import loads
 from torrent import Torrent
 import requests
 from requests.auth import HTTPBasicAuth

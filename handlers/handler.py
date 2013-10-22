@@ -21,6 +21,7 @@ class Handler(object):
         )
 
     def create_target_path(self, target_path):
+        print 'making target path', target_path
         try:
             os.makedirs(target_path)
         except OSError:

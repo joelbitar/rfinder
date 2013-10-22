@@ -3,7 +3,6 @@ __author__ = 'joel'
 from commands import ruTorrentCommands
 from tracker.tracker import Tracker
 
-
 class ruTorrent(object):
     __url = None
     __headers = None
