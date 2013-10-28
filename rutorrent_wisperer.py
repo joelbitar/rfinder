@@ -115,7 +115,9 @@ tracker = Tracker(
 g = r.commands.get_torrent_list()
 
 while True:
+    torrent_count = 0
     for t in g:
+        torrent_count += 1
         if not t.is_done:
             print 'Waiting for item to finish: ', t.name
             continue
@@ -168,4 +170,8 @@ while True:
     )
     remove_empty_directories()
 
-    sleep(10)
+    if torrent_count == 0:
+        print 'No torrents currently downloading or some kind of error occured with the transfer. Sleeping for 10 minutes'
+        sleep(600)
+
+    sleep(30)
