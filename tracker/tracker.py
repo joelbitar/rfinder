@@ -61,7 +61,7 @@ class Tracker(object):
 
         return True
 
-    def is_item_new(self, item, add_item):
+    def is_item_new(self, item, add_item=False):
         if item in self.get_items_in_tracker_file():
             return False
 
