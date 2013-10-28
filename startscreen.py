@@ -1,5 +1,8 @@
 __author__ = 'joel'
 
+# Example:
+# python startscreen.py -sSERVER -uUSERNAME -wPASSWORD -pPORT
+
 import os
 from rutorrent.rutorrent import ruTorrent
 from tracker.tracker import Tracker
