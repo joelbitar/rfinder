@@ -30,7 +30,7 @@ parser.add_option('-c', '--command', dest='command', default=None)
 
 client = paramiko.SSHClient()
 client.load_system_host_keys()
-client.set_missing_host_key_policy(paramiko.WarningPolicy)
+client.set_missing_host_key_policy(paramiko.WarningPolicy())
 print '*** Connecting...', options.host, options.port, options.username, options.password
 client.connect(options.host, int(options.port), options.username, options.password)
 
