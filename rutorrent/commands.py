@@ -44,9 +44,6 @@ class ruTorrentCommand(object):
         )
 
     def perform_post(self):
-        print 'headers', self.ru_torrent_instance.headers
-        print 'Auth:', self.get_basic_auth()
-
         response = requests.post(
             self.url,
             data=self.post_data,
@@ -70,8 +67,11 @@ class ruTorrentCommand(object):
 
 class ruTorrentGetTorrentListCommand(ruTorrentCommand):
     def get_torrents(self):
-        r = self.get_json_response()
-        print len(r)
+        try:
+            r = self.get_json_response()
+        except Exception:
+            return
+
         for key, torrent_data in r.items():
             yield Torrent(key, torrent_data)
 
