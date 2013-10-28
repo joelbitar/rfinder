@@ -1,4 +1,7 @@
 *.py[cod]
+*.py~
+newstufflog
+testpath
 
 # C extensions
 *.so
