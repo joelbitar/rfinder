@@ -16,7 +16,7 @@ class ShowAnalyzer(Analyzer):
         (r'.*\.(\d{4})\.\d{2}\.\d{2}\..*', 18, ('season', None)),
         (r'.*[\.\s]ep(\d{1,2}).*', 15, ('episode', None)),
         (r'.*[\.\s]episode(\d{1,2}).*', 15, ('episode', None)),
-        (r'^.*[\s\.\-]e(\d{1,2})[\s\.\-].*', 20, ('episode', None)),
+        (r'^.*[\s\.\-]e(\d{1,2})[\s\.\-].*', 20, ('episode', None)), # ___E01___
         ]
     def get_confidence(self):
         # Now.. for the fun part!
@@ -71,6 +71,7 @@ class ShowAnalyzer(Analyzer):
             r'(.*)[\s_\-\.]+s\d{1,2}.*', # Show.s01
             r'(.*)[\s_\-\.]+s\d{1,2}[ex]\d{1,2}[\s_\-\.].*',
             r'(.*)[\s_\-\.]\d{3}.*',
+            r'(.*)[\s_\-\.]e\d{2}.*',
         )
         # Iterate of over the paths backwards
         for path_part in self.file.get_path_parts():
