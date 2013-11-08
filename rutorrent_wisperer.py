@@ -119,14 +119,14 @@ while True:
     for t in g:
         torrent_count += 1
         if not t.is_done:
-            print 'Waiting for item to finish: ', t.name
+            print('Waiting for item to finish: ', t.name)
             continue
 
         if not tracker.is_item_new(t.name):
             continue
 
         if not os.path.exists(t.path):
-            print 'Did not exist on local filesystem, ignoring.'
+            print('Did not exist on local filesystem, ignoring.', t.name, t.path)
             continue
 
         print 'YAY new'
