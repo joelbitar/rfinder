@@ -114,7 +114,7 @@ tracker = Tracker(
 
 g = r.commands.get_torrent_list()
 
-while True:
+if True:
     torrent_count = 0
     for t in g:
         torrent_count += 1
