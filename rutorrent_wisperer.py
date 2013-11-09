@@ -116,6 +116,13 @@ g = r.commands.get_torrent_list()
 
 if True:
     torrent_count = 0
+
+    remove_old_output_directories(
+        options.remove_old_output_compare_file,
+        300  # Five hours
+    )
+    remove_empty_directories()
+
     for t in g:
         torrent_count += 1
         if not t.is_done:
@@ -142,17 +149,9 @@ if True:
             print 'I like!', f
 
             # We do not want to fill up the disk for nothing now do we?
-            while FileFinder(options.output_path).files_count() >= options.unpacked_files_count:
+            if FileFinder(options.output_path).files_count() >= options.unpacked_files_count:
                 print 'Files in the output_path, waiting for them to be removed'
-                sleep(120)
-
-                # Remove old directories
-                remove_old_output_directories(
-                    options.remove_old_output_compare_file,
-                    300  # Five hours
-                )
-                # Remove the empty directories
-                remove_empty_directories()
+                exit("Files in out put path")
 
             handler = f.get_handler()
             handler.execute()
@@ -164,14 +163,5 @@ if True:
         tracker.add_item_to_tracker_file(t.name)
         print("\n")
 
-    remove_old_output_directories(
-        options.remove_old_output_compare_file,
-        300  # Five hours
-    )
-    remove_empty_directories()
-
     if torrent_count == 0:
         print 'No torrents currently downloading or some kind of error occured with the transfer. Sleeping for 10 minutes'
-        sleep(600)
-
-    sleep(30)
