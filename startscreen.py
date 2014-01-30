@@ -34,6 +34,8 @@ client.set_missing_host_key_policy(paramiko.WarningPolicy())
 print '*** Connecting...', options.host, options.port, options.username, options.password
 client.connect(options.host, int(options.port), options.username, options.password)
 
+client.exec_command('screen -wipe')
+
 stdin, stdout, strerr = client.exec_command('screen -ls | grep "rfinder"')
 screen_existed = False
 for l in stdout:
