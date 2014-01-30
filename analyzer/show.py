@@ -10,13 +10,14 @@ class ShowAnalyzer(Analyzer):
         (r'.*season(\d{1,2}).*', 60, ('season', None)),
         (r'.*s(\d{1,2})[ex](\d{1,2}).*', 80, ('season', 'episode')),    # ____s01e01____
         (r'.*s(\d{1,2}).*', 40, ('season', None)),
+        (r'.*del\.(\d{1,2})\.av\.\d{1,2}.*', 15, ('episode', None)), # ____X.av.X.
         (r'^(\d)(\d{2})\s\-\s.*', 30, ('season', 'episode')),           # 101 ______
         (r'.*\.(\d)[ex](\d{2})\..*', 30, ('season', 'episode')),      # ____1x01 ______
         (r'.*(\d{4})\.e(\d{1,2}).*', 20, ('season', 'episode')),        # ____213.E10___
         (r'.*\.(\d{4})\.\d{2}\.\d{2}\..*', 18, ('season', None)),
         (r'.*[\.\s]ep(\d{1,2}).*', 15, ('episode', None)),
         (r'.*[\.\s]episode(\d{1,2}).*', 15, ('episode', None)),
-        (r'^.*[\s\.\-]e(\d{1,2})[\s\.\-].*', 20, ('episode', None)),
+        (r'^.*[\s\.\-]e(\d{1,2})[\s\.\-].*', 20, ('episode', None)), # ___E01___
         ]
     def get_confidence(self):
         # Now.. for the fun part!
@@ -71,6 +72,8 @@ class ShowAnalyzer(Analyzer):
             r'(.*)[\s_\-\.]+s\d{1,2}.*', # Show.s01
             r'(.*)[\s_\-\.]+s\d{1,2}[ex]\d{1,2}[\s_\-\.].*',
             r'(.*)[\s_\-\.]\d{3}.*',
+            r'(.*)[\s_\-\.]e\d{2}.*',
+            r'(.*)del\.\d{1,2}\.av\.\d{1,2}.*',# del.X.av.X.
         )
         # Iterate of over the paths backwards
         for path_part in self.file.get_path_parts():

@@ -114,21 +114,19 @@ tracker = Tracker(
 
 g = r.commands.get_torrent_list()
 
-while True:
+if True:
+    torrent_count = 0
     for t in g:
-        print '-'*55
-        print t.path
-
+        torrent_count += 1
         if not t.is_done:
-            print 'Not done'
+            print('Waiting for item to finish: ', t.name)
             continue
 
-        if not tracker.is_item_new(t.name, add_item=True):
-            print 'Already processed'
+        if not tracker.is_item_new(t.name):
             continue
 
         if not os.path.exists(t.path):
-            print 'Did not exist on local filesystem, ignoring.'
+            print('Did not exist on local filesystem, ignoring.', t.name, t.path)
             continue
 
         print 'YAY new'
@@ -137,7 +135,10 @@ while True:
         for f in find_all_files(t.path):
             if not f.is_interesting():
                 continue
-
+            
+            if not tracker.is_item_new(f.path):
+                continue
+            
             print 'I like!', f
 
             # We do not want to fill up the disk for nothing now do we?
@@ -156,6 +157,11 @@ while True:
             handler = f.get_handler()
             handler.execute()
 
+            # Add to tracker.
+            tracker.add_item_to_tracker_file(f.path)
+        
+        # Add the entire torrent to track-file
+        tracker.add_item_to_tracker_file(t.name)
         print("\n")
 
     remove_old_output_directories(
@@ -164,4 +170,8 @@ while True:
     )
     remove_empty_directories()
 
-    sleep(10)
+    if torrent_count == 0:
+        print 'No torrents currently downloading or some kind of error occured with the transfer. Sleeping for 10 minutes'
+        sleep(600)
+
+    sleep(30)

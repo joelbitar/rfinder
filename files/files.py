@@ -174,7 +174,11 @@ class File(object):
         return self.__unicode__()
 
 def find_all_items_in_directory(path):
-    return os.listdir(path)
+    try:
+        return os.listdir(path)
+    except Exception:
+        print 'Did not exist (probably)'
+        return []
 
 def find_all_files(path, base_path=None):
     if base_path is None:
