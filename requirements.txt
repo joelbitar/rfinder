@@ -1,0 +1,7 @@
+FormEncode==1.2.6
+PyYAML==3.11
+SQLObject==1.5.2
+argparse==1.2.1
+simplejson==3.4.1
+wsgiref==0.1.2
+

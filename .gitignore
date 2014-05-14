@@ -40,3 +40,5 @@ nosetests.xml
 
 seedbox
 rutorrent-track
+
+db/*.db

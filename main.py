@@ -85,19 +85,29 @@ settings.config = config
 
 
 if not execute_paths:
-    print settings.DOWNLOADS_FOLDER
+    print 'downloads folder:', settings.DOWNLOADS_FOLDER
     for path in os.listdir(settings.DOWNLOADS_FOLDER):
         full_path = os.path.join(settings.DOWNLOADS_FOLDER, path)
+        print 'Full path: ', full_path
         execute_paths.append(full_path)
+
+print execute_paths
 
 # Run on the paths submitted to us.
 for execute_path in execute_paths:
+    print 'Path: ', execute_path
+
     results = []
 
     if settings.VERBOSE:
-	print 'Path: ', execute_path
+        pass
+
+    print 'Start the analyzing'
     take_action = False
     d = directory.get_dir(dir_name = execute_path)
+    
+    print 'Directory', d
+    
     # The directory is 
     if d is None:
         if settings.VERBOSE:
@@ -132,7 +142,9 @@ for execute_path in execute_paths:
         for path in files.find_all_files(execute_path):
             handler = None
             if path.is_interesting():
+                print "Is interesting", path
                 handler = path.get_handler()
+                print handler
                 success = handler.execute()
                 results.append(success)
     else:

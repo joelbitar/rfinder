@@ -10,17 +10,19 @@ import shutil
 from files.finder import FileFinder
 
 class RarHandler(Handler):
-    def unpack(self, rar_file_path, target_path):
+    def unpack(self, rar_file_path, target_path):          
         try:
             rar_file = RarFile(rar_file_path)
             rar_file.extract(path=target_path)
             return True
-        except:
+        except Exception, e:
+            print "Error", e
             pass
 
         return False
 
     def execute(self):
+        print 'Execute rarhandlar'
         temp_folder_path = None
 
         if settings.TEMP_UNPACK_PATH is not None:
